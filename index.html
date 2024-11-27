@@ -43,7 +43,7 @@
             <div class="card mt-3">
                 <div class="card-body">
                     <h5 class="card-title fw-bold text-center">Expenses</h5>
-                    <h3 class="card-text text-center expenses">20356</h3>
+                    <h3 class="card-text text-center expenses" id="incomeinner2">20356</h3>
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@
         <h2 class="text-bold text-light text-center fw-bold text-decoration-underline">Payments</h2>
     
     
-        <table class="table table-dark table-striped-columns">
+        <table class="table table-dark table-striped-columns text-center justify-content-center">
             .<th>
                 <td>Date</td>
                 <td>Amount</td>
@@ -84,21 +84,21 @@
             </th>
             <tr>
                 <td><i class="bi bi-meta"></i></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>2024.7.01</td>
+                <td>2000.00</td>
+                <td>Card</td>
             </tr>
             <tr>
                 <td><i class="bi bi-youtube"></i></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>2024.6.01</td>
+                <td>5623.00</td>
+                <td>Cash</td>
             </tr>
             <tr>
                 <td><i class="bi bi-facebook"></i></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>2024.4.21</td>
+                <td>45645.00</td>
+                <td>Card</td>
             </tr>
         </table>
     </div>
@@ -166,17 +166,20 @@ const chart2 = new Chart(ctx2, {
     }
 });
 
-// const expenses = [78900, 84656, 54553, 34554, 8788, 2557, 65457, 5657, 2897, 3457, 657, 1557];
-// setTimeout(() => {
-//     expenses.forEach(data2 => {
-//         chart2.data2.datasets2.forEach((dataset2) => {
-//             dataset2.data2.push(data2);
-//             console.log(data2);
-//         });
-//         // incomeinner.innerHTML += `${data.expenses}`
-//         chart2.update();
-//     });
-// }, 1000);
+const incomeinner2 = document.getElementById("incomeinner2");
+const expenses = [78900, 84656, 54553, 34554, 8788, 2557, 65457, 5657, 2897, 3457, 657, 1557]
+let tot2 = 0;
+setTimeout(() => {
+    expenses.forEach(data2 => {
+        chart2.data2.datasets2.forEach((dataset2) => {
+            dataset2.data2.push(data2);
+            console.log(data2);
+            tot+=data2
+        });
+        incomeinner2.innerHTML += `${tot2}`
+        chart2.update();
+    });
+}, 1000);
 
 
 
