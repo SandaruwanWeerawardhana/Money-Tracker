@@ -1,0 +1,17 @@
+
+.header{
+    background-color: rgb(12, 12, 80);
+    margin-right: 5rem;
+    margin-left: 5rem;
+}
+.expenses{
+    color: rgb(160, 13, 13);
+}
+.Income{
+    color: rgb(12, 127, 12);
+}
+.chatBox{
+    max-height: 500px;
+    overflow-y: scroll;
+
+}

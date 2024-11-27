@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Money Tracker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="background-color: rgb(1, 1, 27);">
+    
+<nav class="navbar navbar-expand-lg navbar-light p-3 mb-2 mt-3 bg-primary-subtle text-primary-emphasis ">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold fw-semibold " href="#">Money Tracker</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse  justify-content-between " id="navbarNav">
+            <h5 id="" class="bg-black p-2 rounded-3 text-light">Income & Expenses</h5>
+            <h5 id="" class="bg-black p-2 rounded-3 text-light">Report</h5>
+            <h5 id="" class="bg-black p-2 rounded-3 text-light">Bill Payments</h5>
+            <h5 id="" class="bg-black p-2 rounded-3 text-light">Budget Status</h5>
+
+        </div>
+    </div>
+</nav>
+
+  <header class="header p-2 rounded-4 mt-2 container"><h1 class="fw-bold text-light text-center ">Money Tracker</h1></header>  
+<!-- ----------------------------------------------------------------------------------- -->
+  <div class="container ">
+    <div class="row  justify-content-center">
+        <div class="col-md-4 justify-content-between">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-center">Income</h5>
+                    <h3 class="card-text text-center Income" id="incomeinner">85465</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-center">Expenses</h5>
+                    <h3 class="card-text text-center expenses">20356</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!------------------------------------------------------------------------------------>
+
+<div class="container ">
+    <div class="row ">
+        <div class="col justify-content-between ">
+            <div>
+                <canvas id="myChart" class="mt-2"></canvas>
+            </div>
+        </div>
+        <div class="col align-items-center d- ">
+            <div>
+                <canvas id="myChart2" class="mt-2"></canvas>
+            </div> 
+        </div>
+    </div>
+
+  <input type="text" class="rounded-2  mt-5" id="incometxt" >
+  <button type="button" class="btn btn-success m-3" id="incomebtn">Add Income</button><br>
+  <input type="text" class="rounded-2 " id="expensestxt" >
+  <button type="button" class="btn btn-danger m-3" id="expensesbtn">Add Expenses</button>
+
+<!--------------------------------------------------------------------------------------->
+    <div class="container header pb-3 rounded-3">
+        <h2 class="text-bold text-light text-center fw-bold text-decoration-underline">Payments</h2>
+    
+    
+        <table class="table table-dark table-striped-columns">
+            .<th>
+                <td>Date</td>
+                <td>Amount</td>
+                <td>Method</td>
+            </th>
+            <tr>
+                <td><i class="bi bi-meta"></i></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><i class="bi bi-youtube"></i></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><i class="bi bi-facebook"></i></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+  
+    
+ <!-- =========================================================================================      -->
+      <script>
+
+    // const incomebtn = document.getElementById("incomebtn").value
+    const expensesbtn = document.getElementById("expensesbtn").value
+       
+const ctx = document.getElementById('myChart');
+const chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Octomber', 'November', 'December' ],
+        datasets: [{
+            label: 'Income',
+            data: [],
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// const ctx2 = document.getElementById('myChart2');
+// const chart2 = new Chart(ctx, {
+//     type2: 'line',
+//     data2: {
+//         labels2: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Octomber', 'November', 'December' ],
+//         datasets2: [{
+//             label2: 'Income',
+//             data2: [],
+//         }]
+//     },
+//     options: {
+//         scales: {
+//             y: {
+//                 beginAtZero: true
+//             }
+//         }
+//     }
+// });
+
+const income = [200, 8856, 5453, 3454, 8788, 25657, 67657, 45657, 25897, 25457, 15657, 85657];
+const expenses = [78900, 84656, 54553, 34554, 8788, 2557, 65457, 5657, 2897, 3457, 657, 1557];
+const incomeinner = document.getElementById("incomeinner");
+
+setTimeout(() => {
+    income.forEach(data => {
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.push(data);
+            console.log(data);
+        });
+        incomeinner.innerHTML += `${data.expenses}`
+        chart.update();
+    });
+}, 1000);
+      
+
+        // const ctx = document.getElementById('myChart').getContext('2d');  
+        // const myChart = new Chart(ctx, {  
+        //     type: 'bar',  
+        //     data: {  
+        //         labels: [], 
+        //         datasets: [{  
+        //             label: 'Income',  
+        //             data: [],
+        //             data2: [],  
+        //             borderWidth: 1,  
+        //         }], 
+        //     },  
+        //     options: {  
+        //         scales: {  
+        //             y: {  
+        //                 beginAtZero: true  
+        //             }  
+        //         }  
+        //     }  
+        // });  
+
+ 
+        //     document.getElementById('incomebtn').addEventListener('click', function () {
+        //             const newLabel = `Income ${myChart.data.labels.length + 1}`;
+        //             const incometxt = document.getElementById("incometxt").value
+        //             myChart.data.labels.push(newLabel);
+        //             myChart.data.datasets[0].data.push(incometxt);
+        //             myChart.update();
+        //         });
+ 
+
+
+                
+            // document.getElementById('expensesbtn').addEventListener('click', function () {
+            //         const newLabel2 = `Expenses ${myChart.data2.labels2.length + 1}`;
+            //         const expensestxt = document.getElementById("expensestxt").value
+            //         console.log("expensestxt");
+                    
+            //         myChart.data2.labels2.push(newLabel2);
+            //         myChart.data2.datasets[0].data2.push(expensestxt);
+            //         myChart.update();
+            //     });
+    
+      
+                // const dashboardData = {
+                //     summaryCards: [
+                //         { title: 'Total', value: '150', icon: '📊' },
+                //         { title: 'Average', value: '75%', icon: '📈' },
+                //         { title: 'Status', value: 'Good', icon: '✅' }
+                //     ],
+                //     chartData: {
+                //         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'August', 'September', 'Octomber', 'November', 'December'],
+                //         values: [65, 59, 80, 81, 56]
+                //     },
+                //     listItems: [
+                //         { id: 1, title: 'Item 1', status: 'Active' },
+                //         { id: 2, title: 'Item 2', status: 'Pending' }
+                //     ]
+                // };
+
+      </script>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+</body>
+</html>
