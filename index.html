@@ -35,7 +35,7 @@
             <div class="card mt-3">
                 <div class="card-body">
                     <h5 class="card-title fw-bold text-center">Income</h5>
-                    <h3 class="card-text text-center Income" id="incomeinner">85465</h3>
+                    <h3 class="card-text text-center Income" id="incomeinner"></h3>
                 </div>
             </div>
         </div>
@@ -129,28 +129,9 @@ const chart = new Chart(ctx, {
     }
 });
 
-// const ctx2 = document.getElementById('myChart2');
-// const chart2 = new Chart(ctx, {
-//     type2: 'line',
-//     data2: {
-//         labels2: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Octomber', 'November', 'December' ],
-//         datasets2: [{
-//             label2: 'Income',
-//             data2: [],
-//         }]
-//     },
-//     options: {
-//         scales: {
-//             y: {
-//                 beginAtZero: true
-//             }
-//         }
-//     }
-// });
-
-const income = [200, 8856, 5453, 3454, 8788, 25657, 67657, 45657, 25897, 25457, 15657, 85657];
-const expenses = [78900, 84656, 54553, 34554, 8788, 2557, 65457, 5657, 2897, 3457, 657, 1557];
 const incomeinner = document.getElementById("incomeinner");
+const income = [200, 8856, 5453, 3454, 8788, 25657, 67657, 45657, 25897, 25457, 15657, 85657];
+let totalIncome = 0;
 
 setTimeout(() => {
     income.forEach(data => {
@@ -158,71 +139,46 @@ setTimeout(() => {
             dataset.data.push(data);
             console.log(data);
         });
-        incomeinner.innerHTML += `${data.expenses}`
+        totalIncome+=data
         chart.update();
     });
+    incomeinner.innerHTML += `${totalIncome}`
 }, 1000);
-      
 
-        // const ctx = document.getElementById('myChart').getContext('2d');  
-        // const myChart = new Chart(ctx, {  
-        //     type: 'bar',  
-        //     data: {  
-        //         labels: [], 
-        //         datasets: [{  
-        //             label: 'Income',  
-        //             data: [],
-        //             data2: [],  
-        //             borderWidth: 1,  
-        //         }], 
-        //     },  
-        //     options: {  
-        //         scales: {  
-        //             y: {  
-        //                 beginAtZero: true  
-        //             }  
-        //         }  
-        //     }  
-        // });  
+// -----------------------------------------------------------------
 
- 
-        //     document.getElementById('incomebtn').addEventListener('click', function () {
-        //             const newLabel = `Income ${myChart.data.labels.length + 1}`;
-        //             const incometxt = document.getElementById("incometxt").value
-        //             myChart.data.labels.push(newLabel);
-        //             myChart.data.datasets[0].data.push(incometxt);
-        //             myChart.update();
-        //         });
- 
+const ctx2 = document.getElementById('myChart2');
+const chart2 = new Chart(ctx2, {
+    type: 'line',
+    data: {
+        labels2: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Octomber', 'November', 'December' ],
+        datasets2: [{
+            label2: 'Expenses',
+            data2: [],
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// const expenses = [78900, 84656, 54553, 34554, 8788, 2557, 65457, 5657, 2897, 3457, 657, 1557];
+// setTimeout(() => {
+//     expenses.forEach(data2 => {
+//         chart2.data2.datasets2.forEach((dataset2) => {
+//             dataset2.data2.push(data2);
+//             console.log(data2);
+//         });
+//         // incomeinner.innerHTML += `${data.expenses}`
+//         chart2.update();
+//     });
+// }, 1000);
 
 
-                
-            // document.getElementById('expensesbtn').addEventListener('click', function () {
-            //         const newLabel2 = `Expenses ${myChart.data2.labels2.length + 1}`;
-            //         const expensestxt = document.getElementById("expensestxt").value
-            //         console.log("expensestxt");
-                    
-            //         myChart.data2.labels2.push(newLabel2);
-            //         myChart.data2.datasets[0].data2.push(expensestxt);
-            //         myChart.update();
-            //     });
-    
-      
-                // const dashboardData = {
-                //     summaryCards: [
-                //         { title: 'Total', value: '150', icon: '📊' },
-                //         { title: 'Average', value: '75%', icon: '📈' },
-                //         { title: 'Status', value: 'Good', icon: '✅' }
-                //     ],
-                //     chartData: {
-                //         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'August', 'September', 'Octomber', 'November', 'December'],
-                //         values: [65, 59, 80, 81, 56]
-                //     },
-                //     listItems: [
-                //         { id: 1, title: 'Item 1', status: 'Active' },
-                //         { id: 2, title: 'Item 2', status: 'Pending' }
-                //     ]
-                // };
 
       </script>
    
