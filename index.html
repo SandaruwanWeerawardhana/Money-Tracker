@@ -12,13 +12,13 @@
 <body style="background-color: rgb(1, 1, 27);">
     
 <nav class="navbar navbar-expand-lg navbar-light p-3 mb-2 mt-3 bg-primary-subtle text-primary-emphasis ">
-    <div class="container-fluid">
+    <div class="container-fluid ">
         <a class="navbar-brand fw-bold fw-semibold " href="#">Money Tracker</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse  justify-content-between " id="navbarNav">
-            <h5 id="" class="bg-black p-2 rounded-3 text-light">Income & Expenses</h5>
+            <h5 id="" class="bg-black p-2 rounded-3 text-light ">Income & Expenses</h5>
             <h5 id="" class="bg-black p-2 rounded-3 text-light">Report</h5>
             <h5 id="" class="bg-black p-2 rounded-3 text-light">Bill Payments</h5>
             <h5 id="" class="bg-black p-2 rounded-3 text-light">Budget Status</h5>
@@ -27,7 +27,7 @@
     </div>
 </nav>
 
-  <header class="header p-2 rounded-4 mt-2 container"><h1 class="fw-bold text-light text-center ">Money Tracker</h1></header>  
+  <header class="header p-2 rounded-4 mt-2"><h1 class="fw-bold text-light text-center container ">Money Tracker</h1></header>  
 <!-- ----------------------------------------------------------------------------------- -->
   <div class="container ">
     <div class="row  justify-content-center">
@@ -43,7 +43,7 @@
             <div class="card mt-3">
                 <div class="card-body">
                     <h5 class="card-title fw-bold text-center">Expenses</h5>
-                    <h3 class="card-text text-center expenses" id="incomeinner2">20356</h3>
+                    <h3 class="card-text text-center expenses" id="incomeinner2"></h3>
                 </div>
             </div>
         </div>
@@ -65,41 +65,27 @@
             </div> 
         </div>
     </div>
-
-  <input type="text" class="rounded-2  mt-5" id="incometxt" >
-  <button type="button" class="btn btn-success m-3" id="incomebtn">Add Income</button><br>
-  <input type="text" class="rounded-2 " id="expensestxt" >
-  <button type="button" class="btn btn-danger m-3" id="expensesbtn">Add Expenses</button>
+<div class="text-center justify-content-between">
+    <input type="text" class="rounded-2  mt-5" id="incometxt" >
+    <button type="button" class="btn btn-success m-3" id="incomebtn">Add Income</button><br>
+    <input type="text" class="rounded-2 " id="expensestxt" >
+    <button type="button" class="btn btn-danger m-3" id="expensesbtn">Add Expenses</button>
+</div>
+ 
 
 <!--------------------------------------------------------------------------------------->
-    <div class="container header pb-3 rounded-3">
+    <div class="container header pb-3 rounded-3 text-center justify-content-around">
         <h2 class="text-bold text-light text-center fw-bold text-decoration-underline">Payments</h2>
     
-    
-        <table class="table table-dark table-striped-columns text-center justify-content-center">
-            .<th>
-                <td>Date</td>
-                <td>Amount</td>
-                <td>Method</td>
-            </th>
-            <tr>
-                <td><i class="bi bi-meta"></i></td>
-                <td>2024.7.01</td>
-                <td>2000.00</td>
-                <td>Card</td>
-            </tr>
-            <tr>
-                <td><i class="bi bi-youtube"></i></td>
-                <td>2024.6.01</td>
-                <td>5623.00</td>
-                <td>Cash</td>
-            </tr>
-            <tr>
-                <td><i class="bi bi-facebook"></i></td>
-                <td>2024.4.21</td>
-                <td>45645.00</td>
-                <td>Card</td>
-            </tr>
+        <table class="table table-dark table-striped-columns text-center justify-content-center ">
+             <thead>
+                 <th>Date</th>
+                 <th>Amount</th>
+                 <th>Method</th>
+             </thead>
+               <tbody id="tableid">
+
+               </tbody>
         </table>
     </div>
   
@@ -118,6 +104,7 @@ const chart = new Chart(ctx, {
         datasets: [{
             label: 'Income',
             data: [],
+            borderColor: 'rgb(59,225,0)', 
         }]
     },
     options: {
@@ -151,10 +138,12 @@ const ctx2 = document.getElementById('myChart2');
 const chart2 = new Chart(ctx2, {
     type: 'line',
     data: {
-        labels2: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Octomber', 'November', 'December' ],
-        datasets2: [{
-            label2: 'Expenses',
-            data2: [],
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [{
+            label: 'Expenses',
+            data: [],
+            borderColor: 'red', 
+            backgroundColor: 'rgba(255,0,0,0.5)',
         }]
     },
     options: {
@@ -167,22 +156,34 @@ const chart2 = new Chart(ctx2, {
 });
 
 const incomeinner2 = document.getElementById("incomeinner2");
-const expenses = [78900, 84656, 54553, 34554, 8788, 2557, 65457, 5657, 2897, 3457, 657, 1557]
+const expenses = [7800, 84656, 5453, 34554, 788, 2557, 65457, 5657, 897, 345, 657, 157];
 let tot2 = 0;
+
 setTimeout(() => {
     expenses.forEach(data2 => {
-        chart2.data2.datasets2.forEach((dataset2) => {
-            dataset2.data2.push(data2);
-            console.log(data2);
-            tot+=data2
-        });
-        incomeinner2.innerHTML += `${tot2}`
-        chart2.update();
+        chart2.data.datasets[0].data.push(data2); // Correct usage of data array
+        tot2 += data2;
     });
-}, 1000);
+    incomeinner2.innerHTML = `${tot2}`; // Display total expenses
+    chart2.update(); // Update the chart after adding data
+}, 1000);
 
+const date = ['2024.7.01','2024.8.23','2024.3.3'];
+const amount = ['2002.00','5645.00','5463.00'];
+const mothod = ['card','cash','card'];
 
+const tableid=document.getElementById("tableid");
+for(let i=0;i<date.length;i++){
+    tableid.innerHTML +=
+     `<tr>
+        <td>${date[i]}</td>
+        <td>${amount[i]}</td>
+        <td>${mothod[i]}</td>
+        </tr>
+     `;
+}
 
+   
       </script>
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
